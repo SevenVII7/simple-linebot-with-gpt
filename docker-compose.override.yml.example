@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  # Node.js 服務
+  app:
+    ports:
+      - "3000:${PORT}"  # 對外暴露 port
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
+

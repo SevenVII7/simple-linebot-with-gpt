@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Node.js 服務
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: ai-linebot-app
+    restart: always  # 核心要求：崩潰後自動重啟
+    ports:
+      - "3000:${PORT}"  # 對外暴露 port
+    environment:
+      - PORT=${PORT}
+      - MONGO_URI=${MONGO_URI}
+      - CHANNEL_ID=${CHANNEL_ID}
+      - CHANNEL_SECRET=${CHANNEL_SECRET}
+      - CHANNEL_ACCESS_TOKEN=${CHANNEL_ACCESS_TOKEN}
+    depends_on:
+      - db
+    networks:
+      - bot-network
+
+  # MongoDB 服務
+  db:
+    image: mongo:latest
+    container_name: ai-linebot-db
+    restart: always
+    ports:
+      - "27017:${MONGO_PORT}" # 如果你想從外部 GUI (如 Compass) 連接
+    volumes:
+      - mongo-data:/data/db # 資料持久化，容器刪除資料也不會消失
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

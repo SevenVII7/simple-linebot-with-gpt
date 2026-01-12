@@ -7,21 +7,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-const conversation = [
-  { 
-    role: "system", 
-    content: process.env.DEFAULT_CONTENT
-  }
-];
-
-async function getGptMessage(userMessage){
+async function getGptMessage(userMessageHistory) {
   try {
-    conversation.push({ role: "user", content: userMessage })
-    console.log(conversation)
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-5-nano",
       store: true,
-      messages: conversation,
+      messages: userMessageHistory,
     });
     return completion.choices[0].message
   } catch (e){

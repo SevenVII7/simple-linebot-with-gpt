@@ -31,5 +31,7 @@ local.accunix.net.pem
 cdp-local.accunix.net-key.pem
 cdp-local.accunix.net.pem
 
+docker-compose.override.yml
+
 # ignore vitest ui files
 html
