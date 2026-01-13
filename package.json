@@ -5,19 +5,30 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
+    "dev": "nodemon --signal SIGTERM --exec tsx ./src/index.ts",
+    "start": "ts-node src/index.ts",
+    "build": "rm -rf ./build && tsc -p . && tsc-alias -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@line/bot-sdk": "^10.5.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
+    "@types/node": "^25.0.7",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "linebot": "^1.6.1",
     "mongodb": "^7.0.0",
     "nodemon": "^3.1.11",
-    "openai": "^4.85.3"
+    "openai": "^6.16.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }

@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 3000
 
 # 啟動指令
-CMD [ "node", "index.js" ]
+CMD [ "node", "build/index.js" ]
