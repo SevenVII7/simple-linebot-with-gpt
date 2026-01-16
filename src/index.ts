@@ -17,6 +17,13 @@ const client = new MessagingApiClient({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN as string
 })
 
+app.get('/', (req, res) => {
+  res.send(`
+        Server is running.\r\n\r\n
+        ${req}
+    `)
+})
+
 app.post(
   '/linewebhook',
   line.middleware({
